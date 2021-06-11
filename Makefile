@@ -1,11 +1,11 @@
-build:
-	go build -race -o ./bin/git-audit ./cmd/git-audit/main.go
+BIN=./bin/git-audit
+FLAGS=-race
 
-run:
-	go run -race ./cmd/git-audit/main.go
+build:
+	go build $(FLAGS) -o $(BIN)
 
 install:
-	go install -race ./cmd/***
+	go install $(FLAGS)
 
 fmt:
 	gofmt -l .
@@ -14,7 +14,10 @@ lint:
 	golangci-lint run
 
 test:
-	go test -race -v ./... -count=1
+	go test $(FLAGS) -v ./... -count=1
 
 build-docker:
 	docker build --tag git-audit .
+
+clean:
+	rm $(BIN)
