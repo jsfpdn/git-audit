@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "./;proto";
+
+service ChangelogService {
+  rpc GetChangelog(ChangelogRequest) returns (ChangelogResponse) {}
+}
+
+message ChangelogRequest {
+  string owner = 1;
+  string repo = 2;
+  string SHA = 3;
+}
+
+message ChangelogResponse {
+  ChangelogRequest request = 1;
+  repeated Commit commits = 2;
+}
+
+message Commit {
+  string SHA = 1;
+  string message = 2;
+}

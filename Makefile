@@ -21,3 +21,6 @@ build-docker:
 
 clean:
 	rm $(BIN)
+
+gen-proto:
+	protoc -I . ./proto/changelog.proto --go_out=. --go_opt=paths=source_relative --go-grpc_out=./proto
