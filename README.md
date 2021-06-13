@@ -30,6 +30,9 @@ To see complete commit messages, the `--verbose` (`-v`) flag.
 git-audit server --port <PORT>
 ```
 
+Example of calling this gRPC server from a client can be found at `/examples/grpc_client`.
+Try running `go run examples/grpc_client/main.go <server_address> golang go HEAD`
+to get the latest commit merged to the default branch in the official Go repository.
 
 ## TODOs
 
