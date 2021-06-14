@@ -2,7 +2,7 @@ BIN=./bin/git-audit
 FLAGS=-race
 
 build:
-	go build $(FLAGS) -o $(BIN)
+	CGO_ENABLED=0 go build -o $(BIN)
 
 install:
 	go install $(FLAGS)
@@ -10,14 +10,17 @@ install:
 fmt:
 	gofmt -l .
 
-lint:
+lint: fmt
 	golangci-lint run
 
 test:
 	go test $(FLAGS) -v ./... -count=1
 
-build-docker:
-	docker build --tag git-audit .
+docker:
+	docker build --tag josefpodanyml/git-audit .
+
+docker-push: docker
+	docker push josefpodanyml/git-audit:latest
 
 clean:
 	rm $(BIN)
