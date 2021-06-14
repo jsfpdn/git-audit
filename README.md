@@ -7,7 +7,9 @@ or as a gRPC server.
 ## Install
 
 ```bash
-go get github.com/jsfpdn/git-audit
+git clone https://github.com/jsfpdn/git-audit.git
+cd git-audit
+make install
 ```
 
 ## Usage
@@ -23,8 +25,8 @@ git-audit client --owner <OWNER> --repository <REPOSITORY>
 ```
 
 By default, commits are pretty-printed on a single line,
-like when running `git log --pretty=oneline`.
-To see complete commit messages, the `--verbose` (`-v`) flag.
+similar to `git log --pretty=oneline`.
+To see whole commit messages, use the `--verbose` (`-v`) flag.
 
 ### Running the gRPC Server
 
@@ -40,7 +42,7 @@ to get the latest commit merged to the default branch in the official Go reposit
 
 ```bash
 make docker
-docker run --rm -p 8080:8080 git-audit server --port 8080
+docker run --rm -p 8080:8080 josefpodanyml/git-audit server --port 8080
 ```
 
 ## Deploying the gRPC Server
