@@ -27,7 +27,6 @@ func NewGitAuditServer(client changelog.Client) *GitAuditServer {
 func (s *GitAuditServer) GetChangelog(ctx context.Context, req *pb.ChangelogRequest) (*pb.ChangelogResponse, error) {
 	clog, err := s.client.GetChangelog(ctx, req.Owner, req.Repo, req.SHA)
 	if err != nil {
-		// TODO: refactor changelog.client so that it returns proper status codes.
 		return nil, status.Errorf(codes.Unknown, err.Error())
 	}
 
