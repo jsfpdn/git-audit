@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"net"
 
 	"github.com/jsfpdn/git-audit/pkg/changelog"
@@ -19,7 +20,7 @@ var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "Run gRPC server",
 	Run: func(cmd *cobra.Command, args []string) {
-		listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+		listener, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 		if err != nil {
 			fmt.Printf("failed to listen: %v", err)
 		}
@@ -28,6 +29,7 @@ var serverCmd = &cobra.Command{
 		client := changelog.NewClient(nil)
 		pb.RegisterChangelogServiceServer(grpcServer, server.NewGitAuditServer(client))
 
+		log.Printf("git-audit gRPC server listening on :%d", *port)
 		err = grpcServer.Serve(listener)
 		if err != nil {
 			fmt.Printf("could not serve: %v", err)
